@@ -18,7 +18,7 @@ void turn_right_distance(double turn_right_distance__distance) {
   Integral = 0.0;
   Previous_error = 0.0;
 
-  while ((fabs(static_cast<float>(error)) > 0.5)) {
+  while ((fabs(error) > 0.5)) {
     
     
     error = turn_right_distance__distance - inertial_sensor.rotation(degrees);
@@ -51,7 +51,7 @@ void turn_left_distance(double turn_left_distance__distance) {
   error = turn_left_distance__distance + inertial_sensor.rotation(degrees);
   Integral = 0.0;
   Previous_error = 0.0;
-  while ((fabs(static_cast<float>(error)) > 0.5)) {
+  while ((fabs(error) > 0.5)) {
 
     error = turn_left_distance__distance + inertial_sensor.rotation(degrees);
     Integral = Integral + error;
@@ -117,7 +117,7 @@ void Backward_Distance(double Backward_Distance__Distance) {
   error = Backward_Distance__Distance + rotation_forwards.position(degrees);
   Integral = 0.0;
   Previous_error = 0.0;
-  while ((fabs(static_cast<float>(left_drive.position(degrees) + right_drive.position(degrees))) / 2.0 < Backward_Distance__Distance)) {
+  while ((fabs(left_drive.position(degrees) + right_drive.position(degrees))) / 2.0 < Backward_Distance__Distance) {
 
     error = Backward_Distance__Distance + rotation_forwards.position(degrees);
     Integral = Integral + error;

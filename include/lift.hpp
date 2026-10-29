@@ -1,6 +1,11 @@
 #pragma once
 #include "vex.h"
 #include "PORTS.hpp"
+using namespace vex;
+
+float rotation_to_position;
+
+
 
 // User defined function
 void Lift_step_func() {

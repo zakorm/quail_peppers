@@ -22,8 +22,6 @@ float turn_mod = 0.5f;
 
 int Screen_precision = 0, Console_precision = 0, Controller1_precision = 0;
 
-float error, Lift_degree, velocity, rotation_to_position, Integral, Deriviative, Rotation_correction, Previous_error, april_angle, desired_april_angle;
-
 bool printinertial, descore_state, Lift_state, True_state, Lift_step, Lower_step, Spinner_state, April_state, Aprilstate_1, Aprilstate_0, Aprilstate_2, Aprilstate_3, Aprilstate_4;
 
 

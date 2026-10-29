@@ -2,6 +2,7 @@
 #include "vex.h"
 #include "PORTS.hpp"
 
+float error, Integral, Deriviative, Rotation_correction, Previous_error;
 
 
 float Kp = 0.16f;

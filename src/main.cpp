@@ -12,7 +12,7 @@ competition Competition;
 
 //CHANGING VARS
 
-float move_mod = 0.5f;
+float move_mod = 0.75f;
 float turn_mod = 0.5f;
 //left:right * 2
 float friction_ratio = 0.8f;

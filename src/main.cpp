@@ -15,7 +15,7 @@ competition Competition;
 float move_mod = 0.75f;
 float turn_mod = 0.5f;
 //left:right * 2
-float friction_ratio = 0.8f;
+float friction_ratio = 0.75f;
 
 
 
@@ -34,22 +34,12 @@ bool printinertial, descore_state, Lift_state, True_state, Lift_step, Lower_step
 //Debug
 
 
-void print() {
+void print_stuff() {
   while (true) {
     Brain.Screen.setCursor(1, 1);
-    if (Aprilstate_0) {
-      Brain.Screen.print("April_0");
-    } else if (Aprilstate_1) {
-      Brain.Screen.print("April_1");
-    } else if (Aprilstate_2) {
-      Brain.Screen.print("April_2");
-    } else if (Aprilstate_3) {
-      Brain.Screen.print("April_3");
-    } else if (Aprilstate_4) {
-      Brain.Screen.print("April_4");
-    } else {
-      Brain.Screen.clearScreen();
-    }
+    
+    Brain.Screen.print(inertial_sensor.rotation(degrees));
+    
   wait(5, msec);
   }
 }
@@ -64,30 +54,41 @@ void print() {
 
 // "when started" hat block
 int whenStarted1() {
+  while(true) {
+    print_stuff();
+  }
   return 0;
 }
 
 // "when started" hat block
 int whenStarted2() {
-  Aprilstate_0 = false;
-  Aprilstate_1 = false;
-  Aprilstate_2 = false;
-  Aprilstate_3 = false;
-  Aprilstate_4 = false;
+  // Aprilstate_0 = false;
+  // Aprilstate_1 = false;
+  // Aprilstate_2 = false;
+  // Aprilstate_3 = false;
+  // Aprilstate_4 = false;
   inertial_sensor.startCalibration();
   while (inertial_sensor.isCalibrating()) { task::sleep(50); }
-  inertial_sensor.setRotation(0.0, degrees);
-  rotation_forwards.setPosition(0.0, degrees);
-  rotation_arm.setPosition(0.0, degrees);
-  left_drive.setStopping(brake);
-  right_drive.setStopping(brake);
-  Screen_precision = 0;
+  Brain.Screen.print("done");
+  // inertial_sensor.setRotation(0.0, degrees);
+  // rotation_forwards.setPosition(0.0, degrees);
+  // rotation_arm.setPosition(0.0, degrees);
+  // left_drive.setStopping(brake);
+  // right_drive.setStopping(brake);
+  // Screen_precision = 0;
   return 0;
 }
 
 int whenStarted3() {
   return 0;
 }
+
+
+int onauton_autoncontrol_0() {
+  turn_left_distance(90);
+  return 0;
+}
+
 
 // "when driver control" hat block
 int ondriver_drivercontrol_0() {
@@ -154,7 +155,7 @@ void VEXcode_driver_task() {
 
 void VEXcode_auton_task() {
   // Start the auton control tasks....
-
+  vex::task auton0(onauton_autoncontrol_0);
   while(Competition.isAutonomous() && Competition.isEnabled()) {this_thread::sleep_for(10);}
 
   return;

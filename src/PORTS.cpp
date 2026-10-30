@@ -8,9 +8,9 @@ controller Controller1;
 
 //SENSORS
 
-inertial inertial_sensor(PORT12);
+inertial inertial_sensor(PORT11);
 rotation rotation_forwards(PORT15);
-rotation rotation_arm(PORT11);
+rotation rotation_arm(PORT12);
 bumper bottom_bumper(Brain.ThreeWirePort.C);
 distance claw_dist(PORT3);
 

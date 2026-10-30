@@ -18,21 +18,21 @@ int min_speed = 1;
 void turn_right_distance(double turn_right_distance__distance) {
 
   inertial_sensor.setRotation(0.0, degrees);
-  float dir_left = turn_right_distance__distance - inertial_sensor.rotation(degrees);
+  float error = turn_right_distance__distance - inertial_sensor.rotation(degrees);
   float Integral = 0.0;
-  float Previous_dir_left = 0.0;
+  float Previous_error = 0.0;
 
     left_drive.spin(forward);
     right_drive.spin(forward);
 
-  while ((fabs(dir_left) > 0.5)) {
+  while ((fabs(error) > 0.5)) {
     
     
-    dir_left = turn_right_distance__distance - inertial_sensor.rotation(degrees);
-    Integral = Integral + dir_left;
+    error = turn_right_distance__distance - inertial_sensor.rotation(degrees);
+    Integral = Integral + error;
 
-    float Deriviative = dir_left - Previous_dir_left;
-    float Rotation_correction = Kp * dir_left + (Ki * Integral + Kd * Deriviative);
+    float Deriviative = error - Previous_error;
+    float Rotation_correction = Kp * error + (Ki * Integral + Kd * Deriviative);
 
 
     if (Rotation_correction > max_speed) {
@@ -46,7 +46,7 @@ void turn_right_distance(double turn_right_distance__distance) {
       right_drive.setVelocity(-(Rotation_correction), percent);
     }
     
-    Previous_dir_left = dir_left;
+    Previous_error = error;
 
   wait(5, msec);
   }
@@ -59,19 +59,19 @@ void turn_right_distance(double turn_right_distance__distance) {
 void turn_left_distance(double turn_left_distance__distance) {
   inertial_sensor.setRotation(0.0, degrees);
 
-  float dir_left = turn_left_distance__distance + inertial_sensor.rotation(degrees);
+  float error = turn_left_distance__distance + inertial_sensor.rotation(degrees);
   float Integral = 0.0f;
-  float Previous_dir_left = 0.0f;
+  float Previous_error = 0.0f;
 
   left_drive.spin(forward);
   right_drive.spin(forward);
-  while ((fabs(dir_left) > 0.5f)) {
+  while ((fabs(error) > 0.5f)) {
 
-    dir_left = turn_left_distance__distance + inertial_sensor.rotation(degrees);
-    Integral = Integral + dir_left;
+    error = turn_left_distance__distance + inertial_sensor.rotation(degrees);
+    Integral = Integral * error;
 
-    float Deriviative = dir_left - Previous_dir_left;
-    float Rotation_correction = Kp * dir_left + (Ki * Integral + Kd * Deriviative);
+    float Deriviative = error - Previous_error;
+    float Rotation_correction = Kp * error + Ki * Integral + Kd * Deriviative;
     
     if (Rotation_correction > max_speed) {
       left_drive.setVelocity(-max_speed, percent);
@@ -83,7 +83,7 @@ void turn_left_distance(double turn_left_distance__distance) {
       left_drive.setVelocity(-(Rotation_correction), percent);
       right_drive.setVelocity(Rotation_correction, percent);
     }
-    Previous_dir_left = dir_left;
+    Previous_error = error;
   wait(5, msec);
   }
   left_drive.stop();

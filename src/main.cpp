@@ -14,6 +14,8 @@ competition Competition;
 
 float move_mod = 0.5f;
 float turn_mod = 0.5f;
+//left:right * 2
+float friction_ratio = 0.8f;
 
 
 
@@ -90,8 +92,8 @@ int whenStarted3() {
 // "when driver control" hat block
 int ondriver_drivercontrol_0() {
   while (true) {
-    left_drive.setVelocity((Controller1.Axis3.position() * move_mod + Controller1.Axis1.position() * turn_mod), percent);
-    right_drive.setVelocity((Controller1.Axis3.position() * move_mod - Controller1.Axis1.position() * turn_mod), percent);
+    left_drive.setVelocity((Controller1.Axis3.position() * move_mod + Controller1.Axis1.position() * turn_mod) * friction_ratio, percent);
+    right_drive.setVelocity((Controller1.Axis3.position() * move_mod - Controller1.Axis1.position() * turn_mod) / friction_ratio, percent);
     left_drive.spin(forward);
     right_drive.spin(forward);
   wait(5, msec);

@@ -2,12 +2,13 @@
 #include "vex.h"
 #include "PORTS.hpp"
 
+
 // over
-float Kp = 0.16f;
+float Kp = 0.25f;
 // under
 float Ki = 0.0f;
 // ratio/sensitivity
-float Kd = 0.24f;
+float Kd = 0.25f;
 
 int max_speed = 27;
 
@@ -29,7 +30,7 @@ void turn_right_distance(double turn_right_distance__distance) {
     
     
     error = turn_right_distance__distance - inertial_sensor.rotation(degrees);
-    Integral = Integral + error;
+    Integral = Integral * error;
 
     float Deriviative = error - Previous_error;
     float Rotation_correction = Kp * error + (Ki * Integral + Kd * Deriviative);
@@ -117,7 +118,7 @@ void Forward_distance(double Forward_distance__distance) {
   while (((left_drive.position(degrees) + right_drive.position(degrees)) / 2.0 < Forward_distance__distance)) {
 
     error = Forward_distance__distance - rotation_forwards.position(degrees);
-    Integral = Integral + error;
+    Integral = Integral * error;
 
     float Deriviative = error - Previous_error;
     float Rotation_correction = Kp * error + Ki * Integral + Kd * Deriviative;
@@ -167,7 +168,7 @@ void Backward_Distance(double Backward_Distance__Distance) {
   while ((fabs(left_drive.position(degrees) + right_drive.position(degrees))) / 2.0f < Backward_Distance__Distance) {
 
     error = Backward_Distance__Distance + rotation_forwards.position(degrees);
-    Integral = Integral + error;
+    Integral = Integral * error;
 
     float Deriviative = error - Previous_error;
     float Rotation_correction = Kp * error + (Ki * Integral + Kd * Deriviative);

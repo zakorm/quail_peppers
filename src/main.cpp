@@ -12,10 +12,10 @@ competition Competition;
 
 //CHANGING VARS
 
-float move_mod = 0.75f;
-float turn_mod = 0.5f;
+float move_mod = 0.8f;
+float turn_mod = 0.6f;
 //left:right * 2
-float friction_ratio = 0.75f;
+float friction_ratio = 0.675f;
 
 
 
@@ -84,8 +84,10 @@ int whenStarted3() {
 }
 
 
+
 int onauton_autoncontrol_0() {
   turn_left_distance(90);
+  Forward_distance(300);
   return 0;
 }
 

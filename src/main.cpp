@@ -24,7 +24,7 @@ float friction_ratio = 0.675f;
 
 int Screen_precision = 0, Console_precision = 0, Controller1_precision = 0;
 
-bool printinertial, descore_state, Lift_state, True_state, Lift_step, Lower_step, Spinner_state, April_state, Aprilstate_1, Aprilstate_0, Aprilstate_2, Aprilstate_3, Aprilstate_4;
+bool printinertial, descore_state, Lift_state, Lift_step, Lower_step, Spinner_state, April_state, Aprilstate_1, Aprilstate_0, Aprilstate_2, Aprilstate_3, Aprilstate_4;
 
 
 
